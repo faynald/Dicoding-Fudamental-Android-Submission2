@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Submission 2 Github User</string>
+    <string name="submission_2_github_user">Submission 2 Github User</string>
+    <string name="search">Search</string>
+    <string name="tidak_ditemukan">Pengguna Tidak Ditemukan :(</string>
+    <string name="repositories">Repositories</string>
+    <string name="followers">Followers</string>
+    <string name="following">Following</string>
+</resources>
