@@ -1,17 +1,17 @@
-package com.farhanrv.submission2githubuser.Model;
+package com.farhanrv.submission2githubuser.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class ModelUser{
+public class ModelUserDetail {
+
+	@SerializedName("id")
+	private int id;
 
 	@SerializedName("login")
 	private String login;
 
 	@SerializedName("company")
 	private String company;
-
-	@SerializedName("id")
-	private int id;
 
 	@SerializedName("public_repos")
 	private int publicRepos;
@@ -67,4 +67,11 @@ public class ModelUser{
 		return location;
 	}
 
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
 }

@@ -1,8 +1,9 @@
-package com.farhanrv.submission2githubuser.Networking;
+package com.farhanrv.submission2githubuser.networking;
 
-import com.farhanrv.submission2githubuser.Model.ModelFollowItem;
-import com.farhanrv.submission2githubuser.Model.ModelSearchResponse;
-import com.farhanrv.submission2githubuser.Model.ModelUser;
+import com.farhanrv.submission2githubuser.BuildConfig;
+import com.farhanrv.submission2githubuser.model.ModelFollowItem;
+import com.farhanrv.submission2githubuser.model.ModelUserResponse;
+import com.farhanrv.submission2githubuser.model.ModelUserDetail;
 
 import java.util.ArrayList;
 
@@ -13,15 +14,15 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ApiService {
-    String strAuthorization = "Authorization: token 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";
+    String strAuthorization = BuildConfig.KEY;
 
     @GET("search/users")
     @Headers(strAuthorization)
-    Call<ModelSearchResponse> searchUser(@Query("q") String query);
+    Call<ModelUserResponse> searchUser(@Query("q") String query);
 
     @GET("users/{username}")
     @Headers(strAuthorization)
-    Call<ModelUser> getDetailUser(@Path("username") String username);
+    Call<ModelUserDetail> getDetailUser(@Path("username") String username);
 
     @GET("users/{username}/following")
     @Headers(strAuthorization)
@@ -32,4 +33,3 @@ public interface ApiService {
     Call<ArrayList<ModelFollowItem>> getFollowerUser(@Path("username") String username);
 
 }
-//

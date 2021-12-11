@@ -1,4 +1,4 @@
-package com.farhanrv.submission2githubuser.Adapter;
+package com.farhanrv.submission2githubuser.adapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,24 +9,24 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.farhanrv.submission2githubuser.Model.ModelSearchItem;
-import com.farhanrv.submission2githubuser.UI.DetailActivity;
 import com.farhanrv.submission2githubuser.databinding.ItemGithubUserBinding;
+import com.farhanrv.submission2githubuser.model.ModelUserItem;
+import com.farhanrv.submission2githubuser.ui.detail.DetailActivity;
 
 import java.util.ArrayList;
 
 public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
 
-    private final ArrayList<ModelSearchItem> modelSearchItemArrayList = new ArrayList<>();
-    private final Context context;
+    private final ArrayList<ModelUserItem> items = new ArrayList<>();
+    Context context;
 
     public SearchAdapter(Context context) {
         this.context = context;
     }
 
-    public void setModelSearchItemArrayList(ArrayList<ModelSearchItem> items) {
-        modelSearchItemArrayList.clear();
-        modelSearchItemArrayList.addAll(items);
+    public void setSearchList(ArrayList<ModelUserItem> items) {
+        this.items.clear();
+        this.items.addAll(items);
         notifyDataSetChanged();
     }
 
@@ -40,21 +40,21 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ModelSearchItem item = modelSearchItemArrayList.get(position);
+        ModelUserItem item = items.get(position);
+        holder.binding.tvGithubUsername.setText(item.getLogin());
         Glide.with(holder.itemView.getContext())
                 .load(item.getAvatarUrl())
                 .into(holder.binding.imgAvatar);
-        holder.binding.tvGithubName.setText(item.getLogin());
         holder.binding.getRoot().setOnClickListener(view -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra(DetailActivity.EXTRA_DETAIL_USER, modelSearchItemArrayList.get(position));
+            intent.putExtra(DetailActivity.EXTRA_DETAIL_USER, items.get(position));
             context.startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return modelSearchItemArrayList.size();
+        return items.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

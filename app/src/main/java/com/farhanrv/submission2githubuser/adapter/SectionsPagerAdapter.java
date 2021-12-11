@@ -1,4 +1,4 @@
-package com.farhanrv.submission2githubuser.Adapter;
+package com.farhanrv.submission2githubuser.adapter;
 
 import android.os.Bundle;
 
@@ -7,24 +7,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.farhanrv.submission2githubuser.Model.ModelSearchItem;
-import com.farhanrv.submission2githubuser.UI.FragmentFollowers;
-import com.farhanrv.submission2githubuser.UI.FragmentFollowing;
+import com.farhanrv.submission2githubuser.model.ModelUserItem;
+import com.farhanrv.submission2githubuser.ui.detail.FragmentFollowers;
+import com.farhanrv.submission2githubuser.ui.detail.FragmentFollowing;
 
 public class SectionsPagerAdapter extends FragmentStateAdapter {
 
-    ModelSearchItem modelSearchItem;
+    ModelUserItem modelUserItem;
 
-    public SectionsPagerAdapter(AppCompatActivity activity, ModelSearchItem modelSearchItem) {
+    public SectionsPagerAdapter(AppCompatActivity activity, ModelUserItem modelUserItem) {
         super(activity);
-        this.modelSearchItem = modelSearchItem;
+        this.modelUserItem = modelUserItem;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
         Bundle bundle = new Bundle();
-        bundle.putParcelable("modelSearchItem", modelSearchItem);
+        bundle.putParcelable("modelUserItem", modelUserItem);
         Fragment fragment = new FragmentFollowing();
         switch (position) {
             case 0:

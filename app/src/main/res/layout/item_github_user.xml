@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    android:padding="16dp">
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp">
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/img_avatar"
@@ -17,14 +18,14 @@
         tools:src="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/tvGithubName"
+        android:id="@+id/tvGithubUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_avatar"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="Farhan Reynaldi" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

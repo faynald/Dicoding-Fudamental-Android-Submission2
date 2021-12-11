@@ -1,4 +1,4 @@
-package com.farhanrv.submission2githubuser.UI;
+package com.farhanrv.submission2githubuser.ui.detail;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,22 +11,21 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.farhanrv.submission2githubuser.Adapter.FollowAdapter;
-import com.farhanrv.submission2githubuser.Model.MainViewModel;
-import com.farhanrv.submission2githubuser.Model.ModelSearchItem;
+import com.farhanrv.submission2githubuser.R;
+import com.farhanrv.submission2githubuser.adapter.FollowAdapter;
+import com.farhanrv.submission2githubuser.model.ModelUserItem;
 import com.farhanrv.submission2githubuser.databinding.FragmentFollowBinding;
 
 public class FragmentFollowers extends Fragment {
     FragmentFollowBinding binding;
-    ModelSearchItem modelSearchItem;
+    ModelUserItem modelUserItem;
     FollowAdapter followAdapter;
-    MainViewModel mainViewModel;
-    public static final String EXTRA_DETAIL_USER = "modelSearchItem";
+    FollowersViewModel followersViewModel;
+    public static final String EXTRA_DETAIL_USER = "modelUserItem";
 
     public FragmentFollowers() {
 
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -40,11 +39,11 @@ public class FragmentFollowers extends Fragment {
         binding = FragmentFollowBinding.inflate(inflater, container, false);
 
         if (this.getArguments() != null) {
-            modelSearchItem = this.getArguments().getParcelable(EXTRA_DETAIL_USER);
+            modelUserItem = this.getArguments().getParcelable(EXTRA_DETAIL_USER);
         }
-        String username = modelSearchItem.getLogin();
+        String username = modelUserItem.getLogin();
 
-        followAdapter = new FollowAdapter(getContext());
+        followAdapter = new FollowAdapter();
         LinearLayoutManager llm = new LinearLayoutManager(getContext());
         DividerItemDecoration divider = new DividerItemDecoration(requireContext(), llm.getOrientation());
         binding.rvFragment.setLayoutManager(llm);
@@ -52,11 +51,19 @@ public class FragmentFollowers extends Fragment {
         binding.rvFragment.addItemDecoration(divider);
         binding.rvFragment.setHasFixedSize(true);
 
-        mainViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(MainViewModel.class);
-        mainViewModel.setFollowerUser(username);
-        mainViewModel.getFollowing().observe(getViewLifecycleOwner(), modelFollowItems -> followAdapter.setFollowList(modelFollowItems));
+        followersViewModel = new ViewModelProvider(this, new ViewModelProvider.NewInstanceFactory()).get(FollowersViewModel.class);
+        followersViewModel.setFollowerUser(username);
+        followersViewModel.getFollowers().observe(getViewLifecycleOwner(), items -> {
+            if (!items.isEmpty()) {
+                followAdapter.setFollowList(items);
+            } else {
+                binding.tvDataNotFound.setText(R.string.no_followers);
+                binding.tvDataNotFound.setVisibility(View.VISIBLE);
+            }
 
-        mainViewModel.isLoading().observe(getViewLifecycleOwner(), this::showLoading);
+        });
+
+        followersViewModel.isLoading().observe(getViewLifecycleOwner(), this::showLoading);
         return binding.getRoot();
     }
 

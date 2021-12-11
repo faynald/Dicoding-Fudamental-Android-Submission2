@@ -4,57 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingHorizontal="16dp"
     android:paddingTop="16dp"
-    tools:context=".UI.MainActivity">
+    tools:context=".ui.main.MainActivity">
 
-    <FrameLayout
-        android:id="@+id/fl_search"
+    <SearchView
+        android:id="@+id/search_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:iconifiedByDefault="false"
+        android:paddingHorizontal="8dp"
         android:paddingBottom="8dp"
+        android:queryHint="Search for the name..."
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <EditText
-                android:id="@+id/tiet_search"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:hint="@string/search"
-                android:inputType="text"
-                android:imeOptions="actionSearch"
-                android:maxLines="1"
-                android:drawableEnd="@drawable/ic_baseline_search_24"
-                android:importantForAutofill="no" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:layout_constraintTop_toBottomOf="@+id/fl_search" />
+        app:layout_constraintTop_toBottomOf="@+id/search_view" />
 
     <TextView
-        android:id="@+id/tvTidakDitemukan"
+        android:id="@+id/tvUserNotFound"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:visibility="visible"
-        android:text="@string/tidak_ditemukan"/>
+        tools:visibility="gone"
+        android:text="@string/user_not_found"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"

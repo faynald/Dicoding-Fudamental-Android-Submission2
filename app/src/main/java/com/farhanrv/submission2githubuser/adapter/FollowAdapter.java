@@ -1,31 +1,33 @@
-package com.farhanrv.submission2githubuser.Adapter;
+package com.farhanrv.submission2githubuser.adapter;
 
-import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.DiffUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.farhanrv.submission2githubuser.Model.ModelFollowItem;
 import com.farhanrv.submission2githubuser.databinding.ItemFollowListBinding;
+import com.farhanrv.submission2githubuser.helper.FollowDiffCallback;
+import com.farhanrv.submission2githubuser.model.ModelFollowItem;
 
 import java.util.ArrayList;
 
 public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder> {
 
-    private final ArrayList<ModelFollowItem> modelFollowItemsArrayList = new ArrayList<>();
-    private final Context context;
+    private final ArrayList<ModelFollowItem> items = new ArrayList<>();
 
-    public FollowAdapter(Context context) {
-        this.context = context;
+    public FollowAdapter() {
     }
 
-    public void setFollowList(ArrayList<ModelFollowItem> itemList) {
-        modelFollowItemsArrayList.clear();
-        modelFollowItemsArrayList.addAll(itemList);
-        notifyDataSetChanged();
+    public void setFollowList(ArrayList<ModelFollowItem> items) {
+        final FollowDiffCallback diffCallback = new FollowDiffCallback(this.items, items);
+        final DiffUtil.DiffResult diffResult = DiffUtil.calculateDiff(diffCallback);
+
+        this.items.clear();
+        this.items.addAll(items);
+        diffResult.dispatchUpdatesTo(this);
     }
 
     @NonNull
@@ -38,17 +40,16 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ModelFollowItem item = modelFollowItemsArrayList.get(position);
+        ModelFollowItem item = items.get(position);
         Glide.with(holder.itemView.getContext())
                 .load(item.getAvatarUrl())
                 .into(holder.binding.imageUser);
-
         holder.binding.tvName.setText(item.getLogin());
     }
 
     @Override
     public int getItemCount() {
-        return modelFollowItemsArrayList.size();
+        return items.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

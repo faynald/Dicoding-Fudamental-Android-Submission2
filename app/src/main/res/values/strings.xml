@@ -1,9 +1,25 @@
 <resources>
-    <string name="app_name">Submission 2 Github User</string>
-    <string name="submission_2_github_user">Submission 2 Github User</string>
+    <string name="app_name">Submission 3 Github User</string>
+    <string name="submission_2_github_user">Submission 3 Github User</string>
     <string name="search">Search</string>
-    <string name="tidak_ditemukan">Pengguna Tidak Ditemukan :(</string>
+    <string name="user_not_found">User Not Found :(</string>
     <string name="repositories">Repositories</string>
     <string name="followers">Followers</string>
     <string name="following">Following</string>
+    <string name="favorite">favorite</string>
+    <string name="dark_mode_setting">dark_mode_setting</string>
+    <string name="add_to_favorite">Add to favorite</string>
+    <string name="no_favorites">No Favorites yet</string>
+    <string name="no_favorites_subtitle">Tap the favorite icon on any user page\nto add it to your library</string>
+    <string name="data_not_found">Data Not Found</string>
+    <string name="no_followers">This user has no followers</string>
+    <string name="no_following">This user doesn\'t follow any users</string>
+    <string name="favorite_removed">Removed from Favorite</string>
+    <string name="favorite_added">Added to Favorite</string>
+    <string name="no_favorites_yet">No Favorites yet</string>
+    <string name="tap_the_favorite_icon">Tap the favorite icon on any user page\nto add it to your library</string>
+    <string-array name="tab_follow">
+        <item>Following</item>
+        <item>Followers</item>
+    </string-array>
 </resources>

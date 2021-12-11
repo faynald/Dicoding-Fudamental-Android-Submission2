@@ -1,4 +1,4 @@
-package com.farhanrv.submission2githubuser.Networking;
+package com.farhanrv.submission2githubuser.networking;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

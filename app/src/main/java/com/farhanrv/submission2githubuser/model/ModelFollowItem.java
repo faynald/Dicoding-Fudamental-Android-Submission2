@@ -1,4 +1,4 @@
-package com.farhanrv.submission2githubuser.Model;
+package com.farhanrv.submission2githubuser.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
